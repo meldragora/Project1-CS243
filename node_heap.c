@@ -14,6 +14,11 @@ void sift_up( Heap * heap, Node node)
   
 }
 
+void sift_down( Heap * heap, Node node)
+{
+  
+}
+
 int read_symbols( size_t maxcount, Symbol syms[] )
 {
   
