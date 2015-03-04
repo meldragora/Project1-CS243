@@ -3,6 +3,8 @@
 #include <stdlib.h>
 
 #static compareNode
+#static sift_up
+#static sift_down
 
 int compareNode(Node n1, Node n2)
 {
