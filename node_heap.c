@@ -58,11 +58,19 @@ int read_symbols( size_t maxcount, Symbol syms[] )
 void heap_init( Heap * heap )
 {
   
+  
 }
 
 void heap_make( Heap * heap, size_t length, Symbol symlist[] )
 {
-  
+  for(int i = 0; i < length; ++i)
+  {
+    Node k;
+    k.frequency = symlist[i].frequency;
+    k.num_valid = 1;
+    k.syms[0] = symlist[i];
+    heap_add(heap, k);
+  }
 }
 
 void heap_add( Heap * heap, Node node )
