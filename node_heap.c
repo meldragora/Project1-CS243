@@ -1,6 +1,7 @@
-#include <node_heap.h>
-#include <stdio.h>
+#include <stdbool.h>
 #include <stdlib.h>
+#include <assert.h>
+#include "node_heap.h"
 
 #static compareNode
 #static sift_up
@@ -61,7 +62,7 @@ int contains( size_t maxcount, Symbol syms[], char c)
   return 0;
 }
 
-///returns the number of unique symbols read.
+///returns the number of unique symbols read.  Case sensitive.
 int read_symbols( size_t maxcount, Symbol syms[] )
 {
   int counter = 0;
