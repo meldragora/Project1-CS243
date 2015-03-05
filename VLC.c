@@ -8,5 +8,19 @@
 
 int main(int argc, char * argv[])
 {
-    for(int i = 0; i < argc; ++i)
+	//start off by creating the heap and reading the symbols:
+    Symbol syms[NSYMS];
+    int numsyms = read_symbols(NSYMS, syms[]);
+    Heap * heap;
+    heap_init(heap);
+    heap_make( heap, numsyms, syms[] );
+
+    for( int i = 0; i < NSYMS; ++i)
+    {
+    	printf( "%c %d\n", heap->array[i].syms[0].symbol, heap->array[i].frequency);
+    }
+
+
+
+    return EXIT_SUCCESS;
 }
