@@ -1,32 +1,38 @@
 Assignment Feedback
 
-My name is:
-My login ID is:
+My name is: Tyler Quesnel
+My login ID is: tmq4557
 
-Assignment name is:
+Assignment name is: Project 1 - Variable Length Coding
 
 
 What did I learn?
 
-
+	I learned more about several aspects of memory management in C, as well as the
+	first and last characters in ASCII.  I also learned how to print hexadecimal
+	values in c and where to put the CLIBFLAGS when compiling.
 
 
 What was easy about this assignment?
 
-
+	Setting up most of the methods was pretty easy.  Having done the same assignment
+	(without needing to implement the heap) in java I knew what needed to be done.
 
 
 What gave you problems/troubles?
 
-
+	Figuring out how to write the solution in C.  When I did it in java I had
+	little trouble.
 
 
 What can the instructor do to improve this assignment?
 
-
+	Some more documentation would be very helpful.  Also, adding a suggestion of
+	what to start with when working on the assignment would be extremely helpful
+	(not just for this assignment, but for every assignment in the entirety of CS).
 
 
 What would you have liked to do in this assignment?
 
-
+	To do it in java instead.
 

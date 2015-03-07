@@ -4,7 +4,12 @@
 #include <assert.h>
 #include "node_heap.h"
 
-///@author Tyler Quesnel
+/*
+#static compareNode
+#static sift_up
+#static sift_down
+#static contains
+*/
 
 static int compareNode(Node n1, Node n2)
 {
@@ -14,10 +19,10 @@ static int compareNode(Node n1, Node n2)
 static void sift_up( Heap * heap)
 {
   int p = heap->size-1;
-  while(p > 0)
+  while(p)
   {
     int parent = (p-1)/2;
-    if(compareNode(heap->array[p],heap->array[parent]) > 0){
+    if(compareNode(heap->array[p],heap->array[parent])){
       break;
     }
     else
@@ -40,7 +45,7 @@ static void sift_down( Heap * heap)
     size_t rc = lc+1;
     size_t minc = lc;
     if(rc < heap->size)
-      if(compareNode(heap->array[lc], heap->array[rc]) > 0)
+      if(compareNode(heap->array[lc], heap->array[rc]))
         minc = rc;
     if(compareNode(heap->array[p],heap->array[minc])){
       Node temp = heap->array[p];
@@ -68,10 +73,10 @@ static size_t contains( size_t maxcount, Symbol syms[], char c)
 int read_symbols( size_t maxcount, Symbol syms[] )
 {
   int counter = 0;
-  printf("Enter the message to be encoded then hit CTRL-D:\n");
+  printf("Enter the message to be encoded:");
   char p;
   while((p = getchar()) != EOF){
-    if(p == NUL)
+    if(p == NUL || p == '\n')
     {
       break;
     }
@@ -94,9 +99,14 @@ int read_symbols( size_t maxcount, Symbol syms[] )
 
 void heap_init( Heap * heap )
 {
-  heap->capacity = NSYMS;
+  heap->capacity = sizeof(heap->array)/sizeof(Node)/4;
+  printf("%zu\n", heap->capacity);
+  for( size_t i = 0; i < heap->capacity; ++i)
+  {
+    Node n;
+    heap->array[i] = n;
+  }
   heap->size = 0;
-  
 }
 
 ///heap_make should be called after heap_init and read_symbols.
@@ -106,6 +116,7 @@ void heap_make( Heap * heap, size_t length, Symbol symlist[] )
 {
   if( length <= heap->capacity )
   {
+    heap->size = length;
     for( size_t i = 0; i < length; ++i)
     {
       Node n;
@@ -115,8 +126,8 @@ void heap_make( Heap * heap, size_t length, Symbol symlist[] )
       heap_add( heap, n);
     }
   }
-  //for(size_t x = 0; x < heap->size; ++x)
-    //printf("%c\n", heap->array[x].syms[0].symbol);
+  for(size_t x = 0; x < heap->size; ++x)
+    printf("%c\n", heap->array[x].syms[0].symbol);
 }
 
 void heap_add( Heap * heap, Node node )
@@ -127,13 +138,6 @@ void heap_add( Heap * heap, Node node )
     heap->array[heap->size-1] = node;
     sift_up(heap);
   }
-  /*These print statements were used to help me check for errors.
-  printf("%zu", heap->size);
-  for(size_t i = 0; i < heap->size; ++i)
-  {
-    printf("frequency: %zu\n", heap->array[i].frequency);
-  }
-  printf("\n");*/
 }
 
 Node heap_remove( Heap * heap )
@@ -141,13 +145,19 @@ Node heap_remove( Heap * heap )
   Node n;
   if(heap->size)
   {
-    n = heap->array[0];
     heap->array[0]=heap->array[heap->size-1];
     --heap->size;
     sift_down(heap);
+    n = heap->array[heap->size];
     heap->array[heap->size].frequency = 0;
-	Node blank;
-	heap->array[heap->size] = blank;
+    for(size_t i = 0; i < heap->array[heap->size].num_valid; ++i)
+    {
+      Symbol s;
+      s.frequency = 0;
+      s.bit = 0;
+      s.symbol = NUL;
+      heap->array[heap->size].syms[i] = s;
+    }
     heap->array[heap->size].num_valid = 0;
   }
   return n;
